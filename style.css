@@ -80,9 +80,8 @@ body{
 
     gap:18px;
 
-    align-items:stretch;
-
 }
+
 /* =========================================
    CALCULATOR CARD
 ========================================= */
@@ -108,7 +107,7 @@ body{
 /* Medium card */
 .medium-card{
 
-    min-height:600px;
+    min-height:520px;
 
 }
 .container hr{
@@ -392,44 +391,38 @@ button:hover{
 
     grid-column:2 / span 3;
 
+    grid-row:3;
+
     background:#fff8e1;
 
     border-left:8px solid #f39c12;
 
     border-radius:10px;
 
-    padding:25px;
+    padding:12px;
 
-    margin-top:10px;
+    margin-top:0;
 
     box-shadow:0 5px 15px rgba(0,0,0,.12);
 
-}
-.warning-box h3{	
-
-    text-align:center;
-
-    color:#c62828;
-
-    margin-bottom:20px;
-
-    font-size:24px;
+    align-self:start;
 
 }
+.warning-box h3{
 
+    margin-bottom:8px;
+
+    font-size:18px;
+
+}
 .warning-box ol{
 
-    padding-left:22px;
-
-    line-height:1.8;
-
-    color:#333;
+    line-height:1.4;
 
 }
-
 .warning-box li{
 
-    margin-bottom:12px;
+    margin-bottom:5px;
 
 }
 
@@ -459,13 +452,3 @@ button:hover{
 
 }
 
-
-/* Peringatan */
-
-.warning-box{
-
-    grid-column:2 / span 3;
-
-    grid-row:3;
-
-}
