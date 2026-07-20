@@ -417,7 +417,14 @@ button:hover{
 }
 .warning-box ol{
 
-    line-height:1.4;
+    padding-left:35px;   /* move numbering away from wall */
+
+    line-height:1.35;
+
+    color:#333;
+
+    font-size:12px;      /* smaller wording */
+
 
 }
 .warning-box li{
