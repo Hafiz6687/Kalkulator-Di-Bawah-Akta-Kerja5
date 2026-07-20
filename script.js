@@ -2170,7 +2170,76 @@ function resetOTPH(){
 
 }
 
+// =========================================
+// SEK 18A - LIMIT TARIKH TEMPOH UPAH
+// =========================================
 
+document.getElementById("startDate").addEventListener(
+"change",
+function(){
+
+    let startDate = new Date(this.value);
+
+
+    if(!isNaN(startDate)){
+
+
+        let year = startDate.getFullYear();
+
+        let month = startDate.getMonth();
+
+
+        // Minimum = tarikh mula kerja
+        let minDate = new Date(
+            year,
+            month,
+            startDate.getDate()
+        );
+
+
+        // Maximum = akhir bulan berikutnya
+        let maxDate = new Date(
+            year,
+            month + 2,
+            0
+        );
+
+
+        document.getElementById("endDate").min =
+        formatDate(minDate);
+
+
+        document.getElementById("endDate").max =
+        formatDate(maxDate);
+
+
+        // reset pilihan lama
+        document.getElementById("endDate").value="";
+
+
+    }
+
+});
+
+
+// Convert Date menjadi YYYY-MM-DD
+function formatDate(date){
+
+    let year = date.getFullYear();
+
+    let month = String(
+        date.getMonth()+1
+    ).padStart(2,"0");
+
+
+    let day = String(
+        date.getDate()
+    ).padStart(2,"0");
+
+
+    return `${year}-${month}-${day}`;
+
+}
 
 
 
