@@ -346,6 +346,22 @@ total / 26;
 
 }
 // =========================================
+// GET ORP (WITHOUT PRESSING KIRA)
+// =========================================
+
+function getORP(){
+
+    let total =
+    updateSalaryTotal(
+        "orpBasicSalary",
+        "orpAllowance",
+        "orpTotalSalary"
+    );
+
+    return total / 26;
+
+}
+// =========================================
 // KALKULATOR ORP
 // =========================================
 
@@ -388,7 +404,25 @@ function calculateORP(){
 
 }
 
+// =========================================
+// GET ORP (WITHOUT PRESSING BUTTON)
+// =========================================
 
+function getORP(){
+
+    const gaji = parseMoney(document.getElementById("basicSalary").value);
+
+    const elaun = parseMoney(document.getElementById("allowance").value);
+
+    if(isNaN(gaji) || isNaN(elaun)){
+
+        return null;
+
+    }
+
+    return (gaji + elaun) / 26;
+
+}
 
 
 
@@ -747,12 +781,7 @@ formatRM(total);
 function calculateCutiTahunan(){
 
 
-let ORP =
-parseMoney(
-    document.getElementById(
-        "orpResult"
-    ).innerHTML
-);
+let ORP = getORP();
 
     let days =
     Number(
@@ -805,12 +834,7 @@ parseMoney(
 function calculateCutiSakit(){
 
 
-let ORP =
-parseMoney(
-    document.getElementById(
-        "orpResult"
-    ).innerHTML
-);
+let ORP = getORP();
 
     
     let days =
@@ -2170,6 +2194,8 @@ function resetOTPH(){
 
 }
 
+
+
 // =========================================
 // SEK 18A - LIMIT TARIKH TEMPOH UPAH
 // =========================================
@@ -2180,69 +2206,159 @@ function(){
 
     let startDate = new Date(this.value);
 
+    if(isNaN(startDate)){
+        return;
+    }
 
-    if(!isNaN(startDate)){
+    let year = startDate.getFullYear();
+    let month = startDate.getMonth();
+
+    // Minimum = Tarikh Mula Kerja
+    let minDate = new Date(
+        year,
+        month,
+        startDate.getDate()
+    );
+
+    // Maximum = Hari terakhir bulan berikutnya
+    let maxDate = new Date(
+        year,
+        month + 2,
+        0
+    );
+
+    let endDate =
+    document.getElementById("endDate");
+
+    endDate.min = formatDate(minDate);
+
+    endDate.max = formatDate(maxDate);
+
+    endDate.value = "";
+
+    // Open calendar starting from Tarikh Mula Kerja month
+    endDate.defaultValue = formatDate(minDate);
+
+});
+
+// =========================================
+// SEK 18A - LIMIT TARIKH TEMPOH UPAH
+// CURRENT MONTH + NEXT MONTH ONLY
+// =========================================
 
 
-        let year = startDate.getFullYear();
+let startDateInput =
+document.getElementById("startDate");
 
-        let month = startDate.getMonth();
+
+let endDateInput =
+document.getElementById("endDate");
 
 
-        // Minimum = tarikh mula kerja
-        let minDate = new Date(
+
+if(startDateInput && endDateInput){
+
+
+startDateInput.addEventListener(
+"change",
+function(){
+
+
+    let start =
+    new Date(this.value);
+
+
+
+    if(!isNaN(start)){
+
+
+        let year =
+        start.getFullYear();
+
+
+        let month =
+        start.getMonth();
+
+
+
+        // Minimum:
+        // Tarikh mula kerja
+
+        let minDate =
+        new Date(
             year,
             month,
-            startDate.getDate()
+            start.getDate()
         );
 
 
-        // Maximum = akhir bulan berikutnya
-        let maxDate = new Date(
+
+        // Maximum:
+        // Hari terakhir bulan berikutnya
+
+        let maxDate =
+        new Date(
             year,
             month + 2,
             0
         );
 
 
-        document.getElementById("endDate").min =
+
+        endDateInput.min =
         formatDate(minDate);
 
 
-        document.getElementById("endDate").max =
+
+        endDateInput.max =
         formatDate(maxDate);
 
 
-        // reset pilihan lama
-        document.getElementById("endDate").value="";
+
+        // Reset tarikh lama
+
+        endDateInput.value="";
 
 
     }
 
+
 });
 
-
-// Convert Date menjadi YYYY-MM-DD
-function formatDate(date){
-
-    let year = date.getFullYear();
-
-    let month = String(
-        date.getMonth()+1
-    ).padStart(2,"0");
-
-
-    let day = String(
-        date.getDate()
-    ).padStart(2,"0");
-
-
-    return `${year}-${month}-${day}`;
 
 }
 
 
+// FORMAT DATE YYYY-MM-DD
 
+function formatDate(date){
+
+
+    let y =
+    date.getFullYear();
+
+
+
+    let m =
+    String(
+        date.getMonth()+1
+    )
+    .padStart(2,"0");
+
+
+
+    let d =
+    String(
+        date.getDate()
+    )
+    .padStart(2,"0");
+
+
+
+    return `${y}-${m}-${d}`;
+
+
+}
 
 // =========================================
 // AUTO UPDATE JUMLAH UPAH
@@ -2453,7 +2569,6 @@ function(){
 
 
 });
-
 
 
 
