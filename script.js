@@ -794,7 +794,10 @@ function resetSeksyen18A(){
 
     document.getElementById("amount18A").innerHTML =
     "RM 0.00";
-
+    
+// RESET KEPUTUSAN JUMLAH UPAH
+document.getElementById("resultTotalSalary").innerHTML =
+"RM 0.00";
 
 }
 // =========================================
