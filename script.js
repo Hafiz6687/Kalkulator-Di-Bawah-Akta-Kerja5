@@ -773,6 +773,30 @@ formatRM(total);
 
 }
 
+function resetSeksyen18A(){
+
+    document.getElementById("startDate").value = "";
+
+    document.getElementById("endDate").value = "";
+
+
+    document.getElementById("workDays").innerHTML =
+    "0 hari";
+
+
+    document.getElementById("calendarDays").innerHTML =
+    "0 hari";
+
+
+    document.getElementById("section18ADaily").innerHTML =
+    "RM 0.00";
+
+
+    document.getElementById("amount18A").innerHTML =
+    "RM 0.00";
+
+
+}
 // =========================================
 // KALKULATOR CUTI TAHUNAN
 // =========================================
@@ -1036,7 +1060,25 @@ function calculateGGN(){
 
 }
 
+function resetGGN(){
 
+    document.getElementById("period").value = "";
+
+    document.getElementById("type").value = "";
+
+    document.getElementById("noticeMonth").value = "";
+
+    document.getElementById("noticeYear").value = "";
+
+
+    document.getElementById("days").innerHTML =
+    "0 hari";
+
+
+    document.getElementById("amount").innerHTML =
+    "RM 0.00";
+
+}
 
 
 
@@ -1626,27 +1668,7 @@ function resetCutiSakit(){
 
 function resetGGN(){
 
-
-    resetText(
-        "ggnBasicSalary"
-    );
-
-
-    resetText(
-        "ggnAllowance"
-    );
-
-
-    resetText(
-        "ggnTotalSalary",
-        "RM 0.00"
-    );
-
-
-    resetText(
-        "period"
-    );
-
+    resetText("period");
 
 
     resetResult(
@@ -1660,15 +1682,11 @@ function resetGGN(){
     );
 
 
-
-    let selects=[
-
+    let selects = [
         "type",
         "noticeMonth",
         "noticeYear"
-
     ];
-
 
 
     selects.forEach(function(id){
@@ -1679,16 +1697,13 @@ function resetGGN(){
 
         if(element){
 
-            element.selectedIndex=0;
+            element.selectedIndex = 0;
 
         }
 
-
     });
 
-
 }
-
 // =========================================
 // RESET OT HARI REHAT
 // =========================================
